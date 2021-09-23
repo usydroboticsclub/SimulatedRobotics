@@ -16,5 +16,6 @@ ROS control loop -- to control an existing robot
 http://wiki.ros.org/urdf/Tutorials
 
 rosrun gazebo_ros spawn_model -z 10.0 -file /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf -urdf -model KCA
+rosrun gazebo_ros spawn_model -z 12.0 -x 1 -file /root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf -urdf -model BP
 docker cp keyboard_control_arm/urdf/beam_balance.urdf usrc_gazebo_container:/root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf
-check_urdf < /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf
+check_urdf /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf

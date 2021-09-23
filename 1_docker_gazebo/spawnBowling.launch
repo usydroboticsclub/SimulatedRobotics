@@ -16,6 +16,6 @@
     </include>
 
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-          args="-z 10.0 -file $(find usrc_tutorial)/urdf/bowling.urdf -urdf -model cyl" respawn="false" output="screen" />
+          args="-x 0 -y 0 -z 10.0 -file $(find usrc_tutorial)/urdf/bowling.urdf -urdf -model cyl" respawn="false" output="screen" />
         <!-- equivalent shell: rosrun gazebo_ros spawn_model -z 1.0 -file /root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf -urdf -model robot -->
 </launch>
