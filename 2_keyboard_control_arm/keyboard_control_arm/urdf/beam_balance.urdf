@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot name="movable_arm">
+  <!--TODO: Please complete this and make a pull request. -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="2" radius="1" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1" />
+      <inertia ixx="1.0" ixy="1.0" ixz="1.0" iyy="1.0" iyz="1.0" izz="1.0" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="2" radius="1" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="beam_link_1">
+    <visual>
+      <geometry>
+        <cylinder length="3" radius="0.3" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1" />
+      <inertia ixx="1.0" ixy="1.0" ixz="1.0" iyy="1.0" iyz="1.0" izz="1.0" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="3" radius="0.3" />
+      </geometry>
+    </collision>
+    <origin rpy="0 1.57075 0" xyz="0 0 -0.3"/>
+  </link>
+
+  <link name="beam_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="3" radius="0.3" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1" />
+      <inertia ixx="1.0" ixy="1.0" ixz="1.0" iyy="1.0" iyz="1.0" izz="1.0" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="3" radius="0.3" />
+      </geometry>
+    </collision>
+    <origin rpy="0 1.57075 0" xyz="0 0 0.3"/>
+  </link>
+
+  <joint name="base_to_beam" type="revolute">
+    <parent link="base_link" />
+    <child link="beam_link_1" />
+    <axis xyz="0 0 1" />
+    <limit effort="1000.0" lower="-0.548" upper="0.548" velocity="0.5" />
+    <origin rpy="0 0 0" xyz="0.2 0.01 0" />
+  </joint>
+
+  <joint name="beam_1_to_beam_2" type="fixed">
+    <parent link="beam_link_1" />
+    <child link="beam_link_2" />
+  </joint>
+<!--
+  <gazebo reference="base_link">
+    <static>true</static>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+-->
+</robot>

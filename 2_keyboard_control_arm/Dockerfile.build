@@ -1,0 +1,8 @@
+FROM gazebo_image:latest
+
+# Copy in the files for the keyboard control packages
+RUN mkdir /root/catkin_ws/src/keyboard_control_arm
+COPY keyboard_control_arm /root/catkin_ws/src/keyboard_control_arm
+RUN bash -c "cd ~/catkin_ws && source /opt/ros/melodic/setup.bash && catkin_make"
+
+ENTRYPOINT bash /openvnc.sh;bash

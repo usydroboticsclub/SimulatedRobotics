@@ -1,0 +1,47 @@
+FROM ros:melodic-robot-bionic
+
+### INSTALLATIONS FIRST because Docker caches them which means if you want to edit
+### the dockerfile later it won't need to redownload everything
+
+# Install X server and VNC for a virtual screen
+RUN apt update
+RUN apt install -y x11vnc xvfb firefox fluxbox wget
+
+# Install Gazebo and some useful utilities for later
+RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+RUN sh -c 'wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -'
+
+RUN apt update
+RUN apt install -y gazebo9 libgazebo9-dev
+RUN apt install -y ros-melodic-gazebo-ros-pkgs
+RUN apt install -y rviz
+
+# Niceties
+RUN apt install -y nano
+
+# URDF checker
+RUN apt-get install liburdfdom-tools
+
+# Make it display stuff
+RUN echo "export DISPLAY=:0" >> ~/.bashrc
+RUN echo "#!/bin/bash\nexport DISPLAY=:0\nXvfb -screen 0 1600x1200x24+32 &\nx11vnc &\nfluxbox &" > /openvnc.sh
+RUN chmod +x openvnc.sh
+
+# Some ROS / catkin setup
+RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+RUN mkdir ~/catkin_ws
+RUN mkdir ~/catkin_ws/src
+RUN bash -c "cd ~/catkin_ws && source /opt/ros/melodic/setup.bash && catkin_make"
+RUN echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc
+
+# Copy in the roslaunch files for the spawning-a-model part of the tutorial.
+RUN mkdir /root/catkin_ws/src/usrc_tutorial
+RUN mkdir /root/catkin_ws/src/usrc_tutorial/launch
+RUN mkdir /root/catkin_ws/src/usrc_tutorial/urdf
+COPY bowling.urdf /root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf
+COPY spawnBowling.launch /root/catkin_ws/src/usrc_tutorial/launch/spawnBowling.launch
+COPY package.xml /root/catkin_ws/src/usrc_tutorial/package.xml
+COPY CMakeLists.txt /root/catkin_ws/src/usrc_tutorial/CMakeLists.txt
+RUN bash -c "cd ~/catkin_ws && source /opt/ros/melodic/setup.bash && catkin_make"
+
+ENTRYPOINT bash /openvnc.sh;bash
