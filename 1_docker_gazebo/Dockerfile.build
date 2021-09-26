@@ -24,7 +24,7 @@ RUN apt-get install liburdfdom-tools
 
 # Make it display stuff
 RUN echo "export DISPLAY=:0" >> ~/.bashrc
-RUN echo "#!/bin/bash\nexport DISPLAY=:0\nXvfb -screen 0 1600x1200x24+32 &\nx11vnc &\nfluxbox &" > /openvnc.sh
+RUN echo "#!/bin/bash\nexport DISPLAY=:0\nXvfb -screen 0 1600x1200x24+32 &\nx11vnc --repeat &\nfluxbox &" > /openvnc.sh
 RUN chmod +x openvnc.sh
 
 # Some ROS / catkin setup

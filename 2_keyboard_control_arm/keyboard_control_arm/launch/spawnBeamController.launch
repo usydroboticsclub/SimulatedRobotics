@@ -1,0 +1,9 @@
+<launch>
+
+  <param name="robot_description" textfile="$(find keyboard_control_arm)/urdf/beam_balance.urdf" />
+
+  <rosparam file="$(find keyboard_control_arm)/config/config.yaml" command="load" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/moveable_arm" args="joint1_position_controller joint_state_controller" />
+
+</launch>

@@ -24,15 +24,10 @@ Week 1. Create a 10 pin bowling set and take a picture of it.
 
 Week 2. 
 
-ROS control loop -- to control an existing robot
-- robot state publisher
-- Gazebo interface
-- Python file, ros nodes
-- 
 challenge: Submit video of balance table working (OBS studio)
 
-ROS keyboard control arm -- to create our own robot.
-challenge: add a gripper to the keyboard control arm, pick up a cube
+sorter bot -- OpenCV + Object spawning
+challenge: OBS recording of green sphere bucket and red sphere bucket
 
-tower knocker bot -- OpenCV + Object spawning
-challenge: OBS recording of green sphere  knockout
+Turtlebot: SLAM node, path planning, RVIZ
+challenge: OBS recording of turtlebot doing a path

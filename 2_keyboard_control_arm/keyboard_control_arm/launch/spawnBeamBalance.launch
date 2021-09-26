@@ -6,17 +6,22 @@
   <arg name="gui" default="true" />
   <arg name="headless" default="false" />
   <arg name="debug" default="false" />
+  <arg name="verbose" default="false" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="debug" value="$(arg debug)" />
+    <arg name="verbose" value="$(arg verbose)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)" />
     <arg name="use_sim_time" value="$(arg use_sim_time)" />
     <arg name="headless" value="$(arg headless)" />
   </include>
+  
+  <!-- Needed to prevent spawner from hanging, as spawner uses gazebo_ros_control which needs to know what the robot is like -->
+  <param name="robot_description" textfile="$(find keyboard_control_arm)/urdf/beam_balance.urdf" />
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-x 0 -y 0 -z 1 -file $(find keyboard_control_arm)/urdf/beam_balance.urdf -urdf -model beam_balance" respawn="false" output="screen" />
-  <!-- equivalent shell: rosrun gazebo_ros spawn_model -z 1.0 -file /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf -urdf -model beam_balance -->
 
-  <node name="ball_spawner" pkg="keyboard_control_arm" type="ball_spawner.py"></node>
+  <node name="ball_spawner" pkg="keyboard_control_arm" type="ball_spawner.py" output="screen"></node>
+
 </launch>

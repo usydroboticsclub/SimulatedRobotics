@@ -1,10 +1,17 @@
 <?xml version="1.0"?>
-<robot name="movable_arm">
-  <link name="world"/>
+<robot name="moveable_arm">
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <robotNamespace>/moveable_arm</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <link name="world" />
 
   <joint name="fixed" type="fixed">
-    <parent link="world"/>
-    <child link="base_link"/>
+    <parent link="world" />
+    <child link="base_link" />
   </joint>
 
 
@@ -27,9 +34,11 @@
     </collision>
   </link>
 
-  <joint name="base_to_shoulder" type="continuous">
+  <joint name="base_to_shoulder" type="revolute">
+    
     <parent link="base_link" />
     <child link="shoulder_link" />
+    <limit effort="1000.0" lower="0" upper="0" velocity="0.5" />
     <origin rpy="0 0 0" xyz="0 0 1.7" />
   </joint>
 
@@ -56,9 +65,9 @@
   <joint name="shoulder_to_beam1" type="continuous">
     <parent link="shoulder_link" />
     <child link="beam_link_1" />
-    <axis xyz="1 0 0" />
-    <!--<limit effort="1000.0" lower="-1.57075" upper="1.57075" velocity="0.5" />-->
-    <origin rpy="1 0 0" xyz="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <!--<limit effort="1000.0" lower="-3.14159" upper="0" velocity="0.5" />-->
+    <origin rpy="-1.57075 0 0" xyz="0 0 0" />
   </joint>
 
   <link name="beam_link_1">
@@ -83,7 +92,6 @@
   </link>
 
 
-  
   <link name="beam_link_2">
     <visual>
       <geometry>
@@ -120,4 +128,14 @@
     <selfCollide>1</selfCollide>
     <self_collide>1</self_collide>
   </gazebo>
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_to_beam1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 </robot>
