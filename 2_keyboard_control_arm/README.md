@@ -14,6 +14,10 @@
 6. Next, run  `rosrun keyboard_control_arm ball_control.py`. You will be prompted with a control interface.
     - Try to balance the ball so it does not hit the ground.
 7. Hit CTRL+C to end the ball_control. Then, run `rosrun keyboard_control_arm auto_ball_control.py`. The ball should automatically be balanced.
+    - This doesn't always work! Reasons include:
+        - There's two controllers at play here: one is the `auto_ball_control.py` setting the desired position of the arm, but the other is the `joint_position_controller` we haven't coded that is trying to get the arm to where we tell it. When the ball lands on the arm, joint_position_controller reacts to the sudden jerk of the arm with a sudden force, causing the ball to be thrown back into the air. 
+        - In order to slow the ball to a stop, our `auto_ball_control` is very responsive to the ball's velocity. This however means if we have sharp changes in the ball's velocity, we apply sharp changes to the arm... throwing the ball in the air.
+        - Similarly, when the ball hits the arm on its way down, its vertical velocity is converted into horizontal velocity, which the controller picks up, throwing the ball up again. .-.
 
 ## Exercises
 - Edit `auto_ball_control.py` so that the ball ends up centered at 4 units along the arm, instead of 3.5.
@@ -26,9 +30,12 @@ Contribute to the club by submitting a pull request!
 
 - CHALLENGE: Edit `ball_spawner.py` so that it respawns the ball when the ball goes off the arm, OR the ball has achieved the target position for 10 seconds straight.
 - CHALLENGE: Write inline documentation for each line of the launch files, py files or urdf files. You don't have to do all of them - just pick a file. Something like: The following line does X. Without the following line, Y won't work. (Submit a Pull Request with your solutions!)
-- CHALLENGE: Use dynamic_reconfigure (and its gui counterpart, rqt_reconfigure) to tune the arm PID so the arm isn't jerky. Submit a PR with a modified `Dockerfile.build` and how-to instructions.
+- CHALLENGE: Modify the `beam_balance.urdf` file so that there is a red VISUAL ONLY marker where the centre of the arm is.
+- CHALLENGE: Use dynamic_reconfigure (and its gui counterpart, rqt_reconfigure) to tune the arm PID so the arm isn't jerky. Submit a PR with a modified `Dockerfile.build` and how-to instructions to tune the PID to custom values.
+    - https://wiki.ros.org/dynamic_reconfigure
     - CHALLENGE: Modify auto_ball_control.py so that it uses ros parameters and therefore can be controlled using dynamic_reconfigure. Submit a PR with the modified auto_ball_control.py code.
 - CHALLENGE: Create a section in this readme that uses RQT to inspect the nodes and topics. Include a screenshot, and modify the `Dockerfile.build` so others can run the command.
+- CHALLENGE: Find a way to stop the arm yeeting the ball into the air, using the PID or otherwise.
 - CHALLENGE: Write a version of `auto_ball_control.py` that bounces the ball, not just balances it. (Submit a Pull Request with your solutions!)
 - CHALLENGE: Create a robot with a controllable forearm and an upper arm, using the `beam_balance.urdf` file as a guide. Also create a launch file, yaml file and controller launch file. (Submit a Pull Request with your solutions!)
 
