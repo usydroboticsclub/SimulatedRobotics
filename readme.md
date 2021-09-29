@@ -18,11 +18,7 @@ This tutorial is built so that you can run everything in the tutorials on your W
 Also, it's more "Wow, cool!" with a little bit of "This is how you do actual work" than the other tutorials which assume you have some experience in real robotics.
 
 ## Challenges for Tutorial Series
-If you're doing the USRC Tutorial Series, here's the challenges:
-
-Week 1. Create a 10 pin bowling set and take a picture of it.
-
-Week 2. 
+If you're doing the USRC Tutorial Series, check out the "USRC Weekly Workshops" section in the README for each workshop to find the corresponding challenge. 
 
 challenge: Submit video of balance table working (OBS studio)
 

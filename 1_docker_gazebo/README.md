@@ -74,6 +74,22 @@ You should now see your bowling pins! If you don't see your bowling pins after 1
 ### Shut it down
 On the original window that you ran `docker run` in, type in `exit` and hit enter.
 
+# Exercises
+- Edit the `spawnBowling.launch` file so a 10-pin bowling setup is created. Then use a sphere to knock it over!
+- Modify the `bowling.urdf` file so that spawning bowling objects spawns rectangular prisms.
+- Try some of the tutorials below!
+
+## USRC Weekly workshops
+- Create a 10 pin bowling set, either manually or using the urdf file. Then, take a screenshot and upload it to our Discord with your SID and name.
+
+## Tutorials
+These tutorials are a lot more involved but a lot more in depth. Many of them don't use docker, so just open a docker machine using `docker run --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest` to get access to a shell.
+
+- Using your docker container, try the ROS tutorials: http://wiki.ros.org/ROS/Tutorials
+    - You can skip the first tutorial (Installing and configuring your ROS environment) as it requires an ubuntu machine - instead start on the second tutorial by running the command from before and using a shell in that environment.
+- Also consider some of these Gazebo tutorials: http://gazebosim.org/tutorials
+- Also try the Docker tutorials: https://www.docker.com/101-tutorial
+
 ## Docker, explained
 Operating systems have specific quirks. E.g. Windows programs won't run on Mac.
 

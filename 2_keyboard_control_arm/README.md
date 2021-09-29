@@ -1,7 +1,10 @@
 # Ros and Robot control
+
+In this tutorial, we'll be making a robot that can be controlled via your keyboard and via a script file.
+
 1. Open a terminal / cmd, and `cd ` into the `2_keyboard_control_arm` folder. 
 3. Run `docker build -f Dockerfile.build . -t usrc_tutorial_2_image`.
-    - You will need to have built the previous container to do this step.
+    - You will need to have built the previous image to do this step.
 4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
 5. In DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
@@ -19,16 +22,20 @@
         - In order to slow the ball to a stop, our `auto_ball_control` is very responsive to the ball's velocity. This however means if we have sharp changes in the ball's velocity, we apply sharp changes to the arm... throwing the ball in the air.
         - Similarly, when the ball hits the arm on its way down, its vertical velocity is converted into horizontal velocity, which the controller picks up, throwing the ball up again. .-.
 
-## Exercises
+# Exercises
 - Edit `auto_ball_control.py` so that the ball ends up centered at 4 units along the arm, instead of 3.5.
 - Edit the `beam_balance.urdf` file so that the arm is twice as long.
 - Read up on PID values, then edit the `config.yaml` file's `p,i,d` values so that the beam balance responds faster.
 - Combine the `spawnBeamBalance.launch` file and `spawnBeamController.launch` files into a single file.
 
-## Challenges (in order of difficulty)
+## USRC Weekly Workshops
+1. Download OBS screen recorder.
+2. Record your bot balancing a ball.
+
+## Bugs
 Contribute to the club by submitting a pull request!
 
-- CHALLENGE: Edit `ball_spawner.py` so that it respawns the ball when the ball goes off the arm, OR the ball has achieved the target position for 10 seconds straight.
+- CHALLENGE: Edit `ball_spawner.py` so that it respawns the ball when the ball goes off the arm, OR the ball has achieved the target position for 10 seconds straight. While you're doing this, also edit ball_spawner so that it spawns the ball closer to the arm, so there's less bouncing. 
 - CHALLENGE: Write inline documentation for each line of the launch files, py files or urdf files. You don't have to do all of them - just pick a file. Something like: The following line does X. Without the following line, Y won't work. (Submit a Pull Request with your solutions!)
 - CHALLENGE: Modify the `beam_balance.urdf` file so that there is a red VISUAL ONLY marker where the centre of the arm is.
 - CHALLENGE: Use dynamic_reconfigure (and its gui counterpart, rqt_reconfigure) to tune the arm PID so the arm isn't jerky. Submit a PR with a modified `Dockerfile.build` and how-to instructions to tune the PID to custom values.
@@ -36,12 +43,16 @@ Contribute to the club by submitting a pull request!
     - CHALLENGE: Modify auto_ball_control.py so that it uses ros parameters and therefore can be controlled using dynamic_reconfigure. Submit a PR with the modified auto_ball_control.py code.
 - CHALLENGE: Create a section in this readme that uses RQT to inspect the nodes and topics. Include a screenshot, and modify the `Dockerfile.build` so others can run the command.
 - CHALLENGE: Find a way to stop the arm yeeting the ball into the air, using the PID or otherwise.
-- CHALLENGE: Write a version of `auto_ball_control.py` that bounces the ball, not just balances it. (Submit a Pull Request with your solutions!)
-- CHALLENGE: Create a robot with a controllable forearm and an upper arm, using the `beam_balance.urdf` file as a guide. Also create a launch file, yaml file and controller launch file. (Submit a Pull Request with your solutions!)
 
-## Live workshop proof-of-work
-1. Download OBS screen recorder.
-2. Record your bot balancing a ball.
+
+## Branch challenges
+These challenges are more complete. Feel free to submit a pull request with the solution on a branch.
+
+- CHALLENGE: Write a version of `auto_ball_control.py` that bounces the ball, not just balances it. (Create a branch called `2_auto_bounce`.)
+- CHALLENGE: Create a robot with a controllable forearm and an upper arm, using the `beam_balance.urdf` file as a guide. Also create a launch file, yaml file and controller launch file. (Submit a Pull Request with your solutions!) (Create a branch called `2_double_arm`.)
+- CHALLENGE: Create a newton's cradle urdf file. (Create a branch called `2_newtons_cradle`.)
+- CHALLENGE: Create a robot that has a tray instead of a beam, and does the beam balancing in 2D. (Create a branch called `2_planar_balance`.)
+
 
 ## Resources
 http://wiki.ros.org/urdf/Tutorials
