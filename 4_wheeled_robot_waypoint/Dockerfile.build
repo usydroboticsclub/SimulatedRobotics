@@ -1,0 +1,21 @@
+FROM usrc_tutorial_2_image:latest
+
+### INSTALLATIONS FIRST because Docker caches them which means if you want to edit
+### the dockerfile later it won't need to redownload everything
+
+# Install turtlebot dependencies
+RUN apt update
+RUN apt install -y ros-melodic-joy ros-melodic-teleop-twist-joy ros-melodic-teleop-twist-keyboard ros-melodic-laser-proc ros-melodic-rgbd-launch ros-melodic-depthimage-to-laserscan ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-rosserial-server ros-melodic-rosserial-client ros-melodic-rosserial-msgs ros-melodic-amcl ros-melodic-map-server ros-melodic-move-base ros-melodic-urdf ros-melodic-xacro ros-melodic-compressed-image-transport ros-melodic-rqt* ros-melodic-gmapping ros-melodic-navigation ros-melodic-interactive-markers
+RUN apt install -y ros-melodic-dynamixel-sdk ros-melodic-turtlebot3-msgs ros-melodic-turtlebot3
+RUN apt install -y ros-melodic-gazebo-ros-pkgs
+RUN apt install -y ros-melodic-hector-slam
+
+# Fetch the turtlebot sim stuff
+RUN cd ~/catkin_ws/src && git clone -b melodic-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+
+### BUILDS SECOND: Somewhat more time expensive than simple .bashrc changes, so try to cache them
+RUN bash -c "cd ~/catkin_ws && source /opt/ros/melodic/setup.bash && catkin_make"
+
+### EDITS TO SIMPLE FILES LAST
+RUN echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
+RUN echo "export DISPLAY=:0" >> ~/.bashrc
