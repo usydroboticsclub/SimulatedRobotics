@@ -7,7 +7,7 @@ In this tutorial, we'll be making a robot that can be controlled via your keyboa
     - You will need to have built the previous image to do this step.
 4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
-5. In DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
+5. Open a VNC, then in DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
     - You should see an arm, and a ball being spawned and deleted at 10 second intervals.
 5. In DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamController.launch`. Leave it running.
 6. Finally, open one more shell (still in docker) and run `rostopic pub -1 /moveable_arm/joint1_position_controller/command std_msgs/Float64 "data: 0"`
@@ -53,6 +53,8 @@ These challenges are more complete. Feel free to submit a pull request with the 
 - CHALLENGE: Create a newton's cradle urdf file. (Create a branch called `2_newtons_cradle`.)
 - CHALLENGE: Create a robot that has a tray instead of a beam, and does the beam balancing in 2D. (Create a branch called `2_planar_balance`.)
 
+## Tutorials
+- Tired of making URDFs by hand? Check out Onshape to robot: https://onshape-to-robot.readthedocs.io/en/latest/installation.html
 
 ## Resources
 http://wiki.ros.org/urdf/Tutorials

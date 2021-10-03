@@ -1,0 +1,10 @@
+<launch>
+
+  <param name="robot_description" textfile="$(find ball_sorter_robot)/urdf/robot.urdf" />
+
+  <rosparam file="$(find ball_sorter_robot)/config/config.yaml" command="load" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/ball_sorter" args="joint1_position_controller joint_state_controller" />
+
+  <node name="camera_system" pkg="ball_sorter_robot" type="camera_system.py" output="screen"/>
+</launch>

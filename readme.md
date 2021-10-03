@@ -20,10 +20,6 @@ Also, it's more "Wow, cool!" with a little bit of "This is how you do actual wor
 ## Challenges for Tutorial Series
 If you're doing the USRC Tutorial Series, check out the "USRC Weekly Workshops" section in the README for each workshop to find the corresponding challenge. 
 
-challenge: Submit video of balance table working (OBS studio)
-
-sorter bot -- OpenCV + Object spawning
-challenge: OBS recording of green sphere bucket and red sphere bucket
-
-Turtlebot: SLAM node, path planning, RVIZ
-challenge: OBS recording of turtlebot doing a path
+## Future things
+- Create a tutorial that integrates STL files and urdf files.
+- Create a tutorial for xacro files instead of urdf files.

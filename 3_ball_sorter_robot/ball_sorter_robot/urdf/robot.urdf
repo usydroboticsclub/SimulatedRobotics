@@ -1,0 +1,127 @@
+<robot name="onshape">
+    <link name="base_link"></link>
+    <joint name="base_link_to_base" type="fixed">
+        <parent link="base_link" />
+        <child link="part_1" />
+        <origin rpy="0.0 0 0" xyz="0 0 0" />
+    </joint>
+    <link name="part_1">
+        <visual>
+            <origin xyz="-7.34808 -1 0" rpy="-1.5708 -0 0" />
+            <geometry>
+                <mesh filename="package://ball_sorter_robot/urdf/part_1.stl" />
+            </geometry>
+            <material name="part_1_material">
+                <color rgba="0.615686 0.811765 0.929412 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-7.34808 -1 0" rpy="-1.5708 -0 0" />
+            <geometry>
+                <mesh filename="package://ball_sorter_robot/urdf/part_1.stl" />
+            </geometry>
+            <material name="part_1_material">
+                <color rgba="0.615686 0.811765 0.929412 1.0" />
+            </material>
+        </collision>
+        <inertial>
+            <origin xyz="-3.94217 0 1.54332" rpy="0 0 0" />
+            <mass value="628877" />
+            <inertia ixx="1.8208e+06" ixy="-6.78994e-11" ixz="-71998" iyy="3.77204e+06" iyz="-3.90347e-11" izz="3.91203e+06" />
+        </inertial>
+    </link>
+
+    <link name="part_2">
+        <visual>
+            <origin xyz="-1 2.1609 5.59808" rpy="-0 1.5708 0" />
+            <geometry>
+                <mesh filename="package://ball_sorter_robot/urdf/part_2.stl" />
+            </geometry>
+            <material name="part_2_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-1 2.1609 5.59808" rpy="-0 1.5708 0" />
+            <geometry>
+                <mesh filename="package://ball_sorter_robot/urdf/part_2.stl" />
+            </geometry>
+            <material name="part_2_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0" />
+            </material>
+        </collision>
+        <inertial>
+            <origin xyz="-0.0283448 -0.03378 -0.625" rpy="0 0 0" />
+            <mass value="8317.64" />
+            <inertia ixx="2771.24" ixy="-943.854" ixz="1.10226e-13" iyy="3104.09" iyz="4.31383e-13" izz="3709.28" />
+        </inertial>
+    </link>
+
+    <joint name="tilt" type="revolute">
+        <origin xyz="-1.75 -4.44089e-16 2.1609" rpy="-1.5708 0.7 1.5708" />
+        <parent link="part_1" />
+        <child link="part_2" />
+        <axis xyz="0 0 1" />
+        <limit effort="10000" velocity="20" lower="-0.6" upper="0.6" />
+        <joint_properties friction="0.0" />
+    </joint>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            <robotNamespace>/ball_sorter</robotNamespace>
+        </plugin>
+    </gazebo>
+
+    <transmission name="tran1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="tilt">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <joint name="camera_rgb_joint" type="fixed">
+        <origin xyz="-5 0 6" rpy="0 1.58 0" />
+        <parent link="base_link" />
+        <child link="camera_rgb_frame" />
+    </joint>
+    <link name="camera_rgb_frame" />
+
+    <gazebo reference="camera_rgb_frame">
+        <sensor type="camera" name="Pi Camera">
+            <always_on>true</always_on>
+            <visualize>false</visualize>
+            <camera>
+                <horizontal_fov>1.085595</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.03</near>
+                    <far>100</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>30.0</updateRate>
+                <cameraName>camera</cameraName>
+                <frameName>camera_rgb_optical_frame</frameName>
+                <imageTopicName>rgb/image_raw</imageTopicName>
+                <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+                <hackBaseline>0.07</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

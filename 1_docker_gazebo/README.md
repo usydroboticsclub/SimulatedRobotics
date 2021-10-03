@@ -89,7 +89,7 @@ These tutorials are a lot more involved but a lot more in depth. Many of them do
     - You can skip the first tutorial (Installing and configuring your ROS environment) as it requires an ubuntu machine - instead start on the second tutorial by running the command from before and using a shell in that environment.
 - Also consider some of these Gazebo tutorials: http://gazebosim.org/tutorials
 - Also try the Docker tutorials: https://www.docker.com/101-tutorial
-
+# Notes
 ## Docker, explained
 Operating systems have specific quirks. E.g. Windows programs won't run on Mac.
 
