@@ -23,6 +23,7 @@ Normally you're only running the bottom two layers, so with this amount of layer
 5. Install Vnc Viewer from https://www.realvnc.com/en/connect/download/viewer/. (It's free!)
 6. Open VNC viewer. In the top bar, type `localhost:5900`.
     - Ignore the error message that comes up.
+    - VNC will likely crash at some point during the tutorial. If it does, go back to your `docker run` shell and hit enter a few times, and then type `/openvnc.sh` again to get the vnc back. If you don't do this, you'll get something like `Failed to connect to the container`.
 7. You should see a screen with an ubuntu system inside it.
 8. Right click anywhere on the screen. Go to Applications > Shells > Bash.
     - You may have to wait a few seconds for the system to start up if you can't right click immediately.
@@ -57,7 +58,7 @@ If you're unacquainted with ROS, then saying 'ROS is a way to spawn things in Ga
 ### Editing the world
 Next, we're going to edit the world launch file to set up our bowling arena. 
 1. Open `spawnBowling.launch` and copy the last few lines (starting with `<node>` and then the one after it) back into the `spawnBowling.launch` a few times.
-2. Change the `-model` name and the `-x`, `-y` and `-z` numbers for each copy to make a nice bowling pattern. Each line must have a different model name.
+2. Change the `name=urdf_pin1`, `-model pin1` name and the `-x`, `-y` and `-z` numbers for each copy to make a nice bowling pattern. Each line must have a different model name, and a different node name.
 3. Move the new `spawnBowling.launch` file into your docker container with the following command (run from a NEW, HOST terminal, NOT THE ONE you ran the DOCKER RUN): `docker cp spawnBowling.launch usrc_gazebo_container:/root/catkin_ws/src/usrc_tutorial/launch/spawnBowling.launch`
 4. Hit CTRL-C on your old DOCKER terminal that was running the `roslaunch usrc_tutorial spawnBowling.launch`. This will take some time to stop fully, be patient.
 5. Run `roslaunch usrc_tutorial spawnBowling.launch` in that same terminal again.

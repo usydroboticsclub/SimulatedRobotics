@@ -15,7 +15,6 @@
       <arg name="headless" value="$(arg headless)"/>
     </include>
 
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-          args="-x 0 -y 0 -z 10.0 -file $(find usrc_tutorial)/urdf/bowling.urdf -urdf -model cyl" respawn="false" output="screen" />
-        <!-- equivalent shell: rosrun gazebo_ros spawn_model -z 1.0 -file /root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf -urdf -model robot -->
+    <node name="urdf_pin1_spawn" pkg="gazebo_ros" type="spawn_model"
+          args="-x 0 -y 0 -z 10.0 -file $(find usrc_tutorial)/urdf/bowling.urdf -urdf -model pin1" respawn="false" output="screen" />
 </launch>
