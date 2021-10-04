@@ -55,14 +55,12 @@ Let's use a system called ROS to control gazebo, and tell gazebo to spawn models
 If you're unacquainted with ROS, then saying 'ROS is a way to spawn things in Gazebo' is like saying 'A swiss army knife is for spreading butter': while technically true, there are plenty of things a swiss army knife can do aside from spreading butter, and if you paid a pretty penny to get a swiss army knife, then you might as well used all the bells and whistles on it! We'll be seeing ROS much more in this course, but if you're extra keen, you can check out the ROS tutorials here: [http://wiki.ros.org/ROS/Tutorials]
 
 ### Editing the world
-Next, we're going to edit the world to set up our bowling arena. 
-1. Open `spawnBowling.launch` and copy the last few lines (starting with `<node>` and then the one after it) a few times.
+Next, we're going to edit the world launch file to set up our bowling arena. 
+1. Open `spawnBowling.launch` and copy the last few lines (starting with `<node>` and then the one after it) back into the `spawnBowling.launch` a few times.
 2. Change the `-model` name and the `-x`, `-y` and `-z` numbers for each copy to make a nice bowling pattern. Each line must have a different model name.
-3. Move the new `spawnBowling.launch` file into your docker container with the following command (run from a NEW, HOST terminal): `docker cp bowling.urdf usrc_gazebo_container:/root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf`
+3. Move the new `spawnBowling.launch` file into your docker container with the following command (run from a NEW, HOST terminal, NOT THE ONE you ran the DOCKER RUN): `docker cp spawnBowling.launch usrc_gazebo_container:/root/catkin_ws/src/usrc_tutorial/launch/spawnBowling.launch`
 4. Hit CTRL-C on your old DOCKER terminal that was running the `roslaunch usrc_tutorial spawnBowling.launch`. This will take some time to stop fully, be patient.
 5. Run `roslaunch usrc_tutorial spawnBowling.launch` in that same terminal again.
-
-You should now see your bowling pins! If you don't see your bowling pins after 1 min, run the command `check_urdf /root/catkin_ws/src/usrc_tutorial/urdf/bowling.urdf` and google the resulting error
 
 ### Go bowling!
 1. Create a sphere in the world, the same way you created the cube in the start of this tutorial.
