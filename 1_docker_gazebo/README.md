@@ -14,7 +14,10 @@ Normally you're only running the bottom two layers, so with this amount of layer
 ### Installing everything
 1. Download Docker: https://www.docker.com/products/docker-desktop
     - The community edition will be fine, no need to pay for it :D
-    - If you're on windows, you should also activate WSL, by going to start > type in CMD > right click, run as administrator, and then `wsl --install`. More info here: [https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
+    - If you're on windows, you should also activate WSL, by:
+        - going to start > type in CMD > right click, run as administrator, 
+        - and then `wsl --install`. 
+        - More info here: [https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
 2. Open a terminal / cmd, and `cd ` into the `1_docker_gazebo` folder. 
 3. Run `docker build -f Dockerfile.build . -t gazebo_image`. This creates a docker image called `gazebo_image`. 
 4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest`. This creates a container from the docker image.
