@@ -3,20 +3,20 @@
 In this tutorial, we'll be making a robot that can be controlled via your keyboard and via a script file.
 
 1. Open a terminal / cmd, and `cd ` into the `2_keyboard_control_arm` folder. 
-3. Run `docker build -f Dockerfile.build . -t usrc_tutorial_2_image`.
+2. Run `docker build -f Dockerfile.build . -t usrc_tutorial_2_image`.
     - You will need to have built the previous image to do this step.
-4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
+3. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
-5. Open a VNC and connect to localhost:5900 again. Then in the ubuntu, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
+4. Open a VNC and connect to localhost:5900 again. Then in the ubuntu, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
     - You should see an arm, and a ball being spawned and deleted at 10 second intervals.
 5. In ubuntu, open another shell and run `roslaunch keyboard_control_arm spawnBeamController.launch`. Leave it running.
 6. Finally, open one more shell (still in docker) and run `rostopic pub -1 /moveable_arm/joint1_position_controller/command std_msgs/Float64 "data: 0"`
     - The arm should try and hold itself up.
 
 ## Controlling the arm through a file
-6. Next, run  `rosrun keyboard_control_arm ball_control.py`. You will be prompted with a control interface.
+1. Next, run  `rosrun keyboard_control_arm ball_control.py`. You will be prompted with a control interface.
     - Try to balance the ball so it does not hit the ground.
-7. Hit CTRL+C to end the ball_control. Then, run `rosrun keyboard_control_arm auto_ball_control.py`. The ball should automatically be balanced.
+2. Hit CTRL+C to end the ball_control. Then, run `rosrun keyboard_control_arm auto_ball_control.py`. The ball should automatically be balanced.
     - This doesn't always work! Reasons include:
         - There's two controllers at play here: one is the `auto_ball_control.py` setting the desired position of the arm, but the other is the `joint_position_controller` we haven't coded that is trying to get the arm to where we tell it. When the ball lands on the arm, joint_position_controller reacts to the sudden jerk of the arm with a sudden force, causing the ball to be thrown back into the air. 
         - In order to slow the ball to a stop, our `auto_ball_control` is very responsive to the ball's velocity. This however means if we have sharp changes in the ball's velocity, we apply sharp changes to the arm... throwing the ball in the air.
