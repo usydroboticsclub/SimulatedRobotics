@@ -29,7 +29,7 @@ Normally you're only running the bottom two layers, so with this amount of layer
     - Ignore the error message about encrypted connection that comes up.
     - VNC will likely crash at some point during the tutorial. If it does, go back to your `docker run` shell and hit enter a few times, and then type `/openvnc.sh` again to get the vnc back. If you don't do this, you'll get something like `Failed to connect to the container`.
 7. You should see a screen with an ubuntu system inside it.
-8. Right click anywhere on the screen. Go to Applications > Shells > Bash.
+8. Right click anywhere on the screen in the vnc. Go to Applications > Shells > Bash.
     - You may have to wait a few seconds for the system to start up if you can't right click immediately.
 9. An Inside Terminal should show up. In the inside terminal, run `gazebo`.
 
