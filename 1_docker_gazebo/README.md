@@ -21,11 +21,12 @@ Normally you're only running the bottom two layers, so with this amount of layer
 2. Open a terminal / cmd, and `cd ` into the `1_docker_gazebo` folder. 
 3. Run `docker build -f Dockerfile.build . -t gazebo_image`. This creates a docker image called `gazebo_image`. 
 4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest`. This creates a container from the docker image.
-    - You'll see a bunch of text come up. That's normal, don't worry.
+    - You'll see a bunch of text come up. That's normal, don't worry. 
+    - The command window should stick around, that's also normal.
     - ... unless you see something like `docker: Error response from daemon: Conflict. The container name "/usrc_gazebo_container" is already in use by container`. In that case, run `docker container rm usrc_gazebo_container` then try again.
 5. Install Vnc Viewer from https://www.realvnc.com/en/connect/download/viewer/. (It's free!)
 6. Open VNC viewer. In the top bar, type `localhost:5900`.
-    - Ignore the error message that comes up.
+    - Ignore the error message about encrypted connection that comes up.
     - VNC will likely crash at some point during the tutorial. If it does, go back to your `docker run` shell and hit enter a few times, and then type `/openvnc.sh` again to get the vnc back. If you don't do this, you'll get something like `Failed to connect to the container`.
 7. You should see a screen with an ubuntu system inside it.
 8. Right click anywhere on the screen. Go to Applications > Shells > Bash.
