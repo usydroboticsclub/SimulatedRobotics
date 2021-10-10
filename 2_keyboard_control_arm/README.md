@@ -7,9 +7,9 @@ In this tutorial, we'll be making a robot that can be controlled via your keyboa
     - You will need to have built the previous image to do this step.
 4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
-5. Open a VNC, then in DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
+5. Open a VNC and connect to localhost:5900 again. Then in the ubuntu, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
     - You should see an arm, and a ball being spawned and deleted at 10 second intervals.
-5. In DOCKER, open a shell and run `roslaunch keyboard_control_arm spawnBeamController.launch`. Leave it running.
+5. In ubuntu, open a shell and run `roslaunch keyboard_control_arm spawnBeamController.launch`. Leave it running.
 6. Finally, open one more shell (still in docker) and run `rostopic pub -1 /moveable_arm/joint1_position_controller/command std_msgs/Float64 "data: 0"`
     - The arm should try and hold itself up.
 
