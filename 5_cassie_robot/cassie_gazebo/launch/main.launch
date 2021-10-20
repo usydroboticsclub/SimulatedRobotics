@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <include file="$(find cassie_gazebo)/launch/spawn_only.launch">
+  </include>
+
+  <include file="$(find cassie_gazebo)/launch/cassie_control.launch">
+    <arg name="robot_name" value="cassie" />
+  </include>
+
+</launch>

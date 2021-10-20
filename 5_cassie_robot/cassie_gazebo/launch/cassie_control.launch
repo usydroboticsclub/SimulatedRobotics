@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <arg name="robot_name" default="cassie" />
+  
+  <arg name="cassie_filename" default="cassie_gazebo" />
+  <param name="robot_description" command="$(find xacro)/xacro $(find cassie_gazebo)/urdf/$(arg cassie_filename).xacro" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/cassie" respawn="false" output="screen" args="
+                              joint_state_controller 
+                              hip_abduction_left_joint_position_controller
+                              hip_abduction_right_joint_position_controller
+                              hip_rotation_left_joint_position_controller
+                              hip_rotation_right_joint_position_controller
+                              hip_flexion_left_joint_position_controller
+                              hip_flexion_right_joint_position_controller
+                              knee_joint_left_joint_position_controller
+                              knee_joint_right_joint_position_controller
+                              toe_joint_left_joint_position_controller
+                              toe_joint_right_joint_position_controller">
+    <remap from="robot_description" to="$(arg robot_name)_robot_description" />
+    
+  </node>
+
+</launch>

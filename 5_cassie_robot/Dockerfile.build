@@ -1,0 +1,11 @@
+FROM usrc_tutorial_2_image:latest
+
+# Copy in the files for cassie
+RUN cd /root/catkin_ws/src && git clone https://github.com/UMich-BipedLab/cassie_description.git
+RUN bash -c "cd ~/catkin_ws && source /opt/ros/melodic/setup.bash && catkin_make"
+RUN apt install -y ros-melodic-joint-state-publisher-gui ros-melodic-rviz 
+RUN apt install -y ros-melodic-multisense-ros
+
+COPY cassie_gazebo /root/catkin_ws/src/cassie_gazebo
+
+ENTRYPOINT bash /openvnc.sh;bash

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cassie">
+
+
+  <xacro:include filename="$(find cassie_gazebo)/urdf/cassie_real.xacro" />
+
+  <link name="world" />
+
+  <joint name="worldfixed" type="revolute">
+    <!-- Not actually a fixed joint otherwise pelvis will be optimised out -->
+    <axis xyz="0 0 1" />
+    <parent link="world" />
+    <child link="pelvis" />
+    <limit lower="0" upper="0" effort="1.0" velocity="0.01" />
+  </joint>
+
+
+  <!-- Sensors and so On -->
+
+
+</robot>

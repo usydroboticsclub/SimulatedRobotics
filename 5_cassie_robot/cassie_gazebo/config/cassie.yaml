@@ -1,0 +1,51 @@
+cassie:
+    joint_state_controller:
+      type: joint_state_controller/JointStateController
+      publish_rate: 50
+    
+    # Position Controllers ---------------------------------------
+    hip_abduction_left_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_abduction_left
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+    hip_abduction_right_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_abduction_right
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+    
+    hip_rotation_left_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_rotation_left
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+    hip_rotation_right_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_rotation_right
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+      
+    hip_flexion_left_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_flexion_left
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+    hip_flexion_right_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip_flexion_right
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+      
+    knee_joint_left_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee_joint_left
+      pid: {p: 100.0, i: 0.0, d: 0.5}
+    knee_joint_right_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee_joint_right
+      pid: {p: 100.0, i: 0.0, d: 0.5}
+
+      
+    toe_joint_left_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: toe_joint_left
+      pid: {p: 10.0, i: 0.0, d: 0.5}
+    toe_joint_right_joint_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: toe_joint_right
+      pid: {p: 10.0, i: 0.0, d: 0.5}
