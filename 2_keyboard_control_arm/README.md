@@ -5,7 +5,7 @@ In this tutorial, we'll be making a robot that can be controlled via your keyboa
 1. Open a terminal / cmd, and `cd ` into the `2_keyboard_control_arm` folder. 
 2. Run `docker build -f Dockerfile.build . -t usrc_tutorial_2_image`.
     - You will need to have built the previous image to do this step.
-3. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
+3. Run the container, using `docker run --rm --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_2_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
 4. Open a VNC and connect to localhost:5900 again. Then in the ubuntu, open a shell and run `roslaunch keyboard_control_arm spawnBeamBalance.launch`.
     - You should see an arm, and a ball being spawned and deleted at 10 second intervals.
@@ -63,3 +63,4 @@ http://wiki.ros.org/urdf/Tutorials
 - `check_urdf /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf`
 - `rosrun gazebo_ros spawn_model -z 10.0 -file /root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf -urdf -model KCA`
 - `docker cp keyboard_control_arm/urdf/beam_balance.urdf usrc_gazebo_container:/root/catkin_ws/src/keyboard_control_arm/urdf/beam_balance.urdf`
+- `docker cp keyboard_control_arm/scripts/auto_ball_control.py usrc_gazebo_container:/root/catkin_ws/src/keyboard_control_arm/scripts/`

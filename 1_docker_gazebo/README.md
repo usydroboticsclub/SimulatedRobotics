@@ -20,7 +20,7 @@ Normally you're only running the bottom two layers, so with this amount of layer
         - More info here: [https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
 2. Open a terminal / cmd, and `cd ` into the `1_docker_gazebo` folder. 
 3. Run `docker build -f Dockerfile.build . -t gazebo_image`. This creates a docker image called `gazebo_image`. 
-4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest`. This creates a container from the docker image.
+4. Run the container, using `docker run --rm --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest`. This creates a container from the docker image.
     - You'll see a bunch of text come up. That's normal, don't worry. 
     - The command window should stick around, that's also normal.
     - ... unless you see something like `docker: Error response from daemon: Conflict. The container name "/usrc_gazebo_container" is already in use by container`. In that case, run `docker container rm usrc_gazebo_container` then try again.
@@ -86,7 +86,7 @@ On the original window that you ran `docker run` in, type in `exit` and hit ente
 - Create a 10 pin bowling set, either manually or using the urdf file. Then, take a screenshot and upload it to our Discord with your SID and name.
 
 ## Tutorials
-These tutorials are a lot more involved but a lot more in depth. Many of them don't use docker, so just open a docker machine using `docker run --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest` to get access to a shell.
+These tutorials are a lot more involved but a lot more in depth. Many of them don't use docker, so just open a docker machine using `docker run --rm --name=usrc_gazebo_container -p 5900:5900 -it gazebo_image:latest` to get access to a shell.
 
 - Using your docker container, try the ROS tutorials: http://wiki.ros.org/ROS/Tutorials
     - You can skip the first tutorial (Installing and configuring your ROS environment) as it requires an ubuntu machine - instead start on the second tutorial by running the command from before and using a shell in that environment.

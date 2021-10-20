@@ -5,7 +5,7 @@ In this tutorial, we'll be integrating OpenCV into our environment so we can sim
 1. Open a terminal / cmd, and `cd ` into the `3_ball_sorter_robot` folder. 
 3. Run `docker build -f Dockerfile.build . -t usrc_tutorial_3_image`.
     - You will need to have built the image from tutorial 2 to do this step.
-4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_3_image:latest`.
+4. Run the container, using `docker run --rm --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_3_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
 5. Open a VNC, then in DOCKER, open a shell and run `roslaunch ball_sorter_robot spawnBallSorter.launch`.
     - You will have to pan/zoom the camera a lot usng the left and right mouse buttons.

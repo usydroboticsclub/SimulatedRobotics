@@ -5,7 +5,7 @@ In this tutorial, we'll be using an existing simulated robotics platform (turtle
 1. Open a terminal / cmd, and `cd ` into the `4_wheeled_robot_waypoint` folder. 
 3. Run `docker build -f Dockerfile.build . -t usrc_tutorial_4_image`.
     - You will need to have built the image from tutorial 1 to do this step.
-4. Run the container, using `docker run --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_4_image:latest`.
+4. Run the container, using `docker run --rm --name=usrc_gazebo_container -p 5900:5900 -it usrc_tutorial_4_image:latest`.
     - You will likely need to run `docker container rm usrc_gazebo_container` to clean out the previous container.
 5. In DOCKER, open a shell and run `roslaunch turtlebot3_gazebo turtlebot3_world.launch`.
     - You should see a small robot in a playing field. 
